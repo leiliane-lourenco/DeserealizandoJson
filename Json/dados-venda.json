@@ -1,0 +1,43 @@
+{
+  "Pedido": {
+    "Id": "2138fb03-8eef-4189-86d5-953636367b0a",
+    "Date": "2022-06-20T17:52:42.9208812-03:00",
+    "Cliente": {
+      "Id": "0209dec3-bb79-486c-9d26-48676b012a99",
+      "Nome": "Maria Santos",
+      "Telefone": "967890678",
+      "Endereco": {
+        "Id": "d54f81ac-a346-473f-902b-4aaf218a9cbe",
+        "Rua": "Travessa da Paz",
+        "Numero": 254,
+        "Complemento": "apartamento 31",
+        "Cep": "08266580"
+      }
+    },
+    "Venda": {
+      "Id": "19a1f368-efd4-4e01-bee0-58674faec8d2",
+      "Data": "2022-06-20T17:52:42.9191219-03:00",
+      "Itens": [
+        {
+          "Id": 1,
+          "Descricao": "Capsula café expresso",
+          "Valor": 44,
+          "Quantidade": 2
+        },
+        {
+          "Id": 2,
+          "Descricao": "Capsula café au lait",
+          "Valor": 24,
+          "Quantidade": 1
+        }
+      ]
+    },
+    "EnderecoEntrega": {
+      "Id": "d54f81ac-a346-473f-902b-4aaf218a9cbe",
+      "Rua": "Travessa da Paz",
+      "Numero": 254,
+      "Complemento": "apartamento 31",
+      "Cep": "08266580"
+    }
+  }
+}
