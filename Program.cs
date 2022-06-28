@@ -31,99 +31,150 @@ namespace RevisaoListasEx
 
             foreach (var jsonFirstToken in jsonObject.Children<JProperty>())
             {
-                var caracteristicaDinamica = new CaractetisticasDinamicas();
+                var date = new CaractetisticasDinamicas();
+                var clienteNome = new CaractetisticasDinamicas();
+                var clienteTelefone = new CaractetisticasDinamicas();
+                var endereçoRua = new CaractetisticasDinamicas();
+                var enderecoNumero = new CaractetisticasDinamicas();
+                var enderecoComplemento = new CaractetisticasDinamicas();
+                var enderecoCep = new CaractetisticasDinamicas();
+                var vendaData = new CaractetisticasDinamicas();
+                var vendaId = new CaractetisticasDinamicas();
+                var vendaItemId = new CaractetisticasDinamicas();
+                var vendaItemDescricao = new CaractetisticasDinamicas();
+                var vendaItemValor = new CaractetisticasDinamicas();
+                var vendaItemQtd = new CaractetisticasDinamicas();
+                var entregaRua = new CaractetisticasDinamicas();
+                var entregaNumero = new CaractetisticasDinamicas();
+                var entregaComplemento = new CaractetisticasDinamicas();
+                var entregaCep = new CaractetisticasDinamicas();
 
-                foreach (var jsonThirdToken in jsonFirstToken.Children())
+                foreach (var jsonSecondToken in jsonFirstToken.Children())
                 {
-                    if (jsonThirdToken.Path.Contains("Pedido"))
+                    foreach (JProperty jsonId in jsonSecondToken)
                     {
-                        foreach (JProperty jsonId in jsonThirdToken)
+                        if (jsonId.Path.Contains("Date"))
                         {
-                            if (jsonId.Path.Contains("Date"))
-                            {
-                                caracteristicaDinamica.NomeCampo = jsonId.Path;
-                                caracteristicaDinamica.ValorCampo = jsonId.Value.ToString();
-                                caracteristicasDinamicas.Add(caracteristicaDinamica);
-                                Console.WriteLine(jsonId.Path);
-                            }
+                            date.NomeCampo = jsonId.Path;
+                            date.ValorCampo = jsonId.Value.ToString();
+                            caracteristicasDinamicas.Add(date);
                         }
                     }
-                    foreach (JProperty jsonToken in jsonThirdToken.Children().Children().Children())
+
+                    foreach (JProperty jsonToken in jsonSecondToken.Children().Children().Children())
                     {
                         if (jsonToken.Path.Contains("Cliente"))
                         {
-                            if (jsonToken.Path.Contains("Cliente.Endereco"))
+                            if (jsonToken.Path.Contains("Nome"))
+                            {
+                                clienteNome.NomeCampo = jsonToken.Path;
+                                clienteNome.ValorCampo = jsonToken.Value.ToString();
+                                caracteristicasDinamicas.Add(clienteNome);
+
+                            }
+                            if (jsonToken.Path.Contains("Telefone"))
+                            {
+                                clienteTelefone.NomeCampo = jsonToken.Path;
+                                clienteTelefone.ValorCampo = jsonToken.Value.ToString();
+                                caracteristicasDinamicas.Add(clienteTelefone);
+
+                            }
+                            if (jsonToken.Path.Contains("Endereco"))
                             {
                                 foreach (var jsonTokenNew in jsonToken)
                                 {
                                     foreach (JProperty pro in jsonTokenNew)
                                     {
-                                        caracteristicaDinamica.NomeCampo = pro.Path;
-                                        caracteristicaDinamica.ValorCampo = pro.Value.ToString();
-                                        caracteristicasDinamicas.Add(caracteristicaDinamica);
-                                        Console.WriteLine(pro.Path);
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                caracteristicaDinamica.NomeCampo = jsonToken.Path;
-                                caracteristicaDinamica.ValorCampo = jsonToken.Value.ToString();
-                                caracteristicasDinamicas.Add(caracteristicaDinamica);
-                                Console.WriteLine(jsonToken.Path);
-                            }
-
-                        }
-                    }
-                    foreach (JProperty jsonToken in jsonThirdToken.Children().Children().Children())
-                    {
-                        if (jsonToken.Path.Contains("Venda"))
-                        {
-                            if (jsonToken.Path.Contains("Itens"))
-                            {
-                                foreach (var jsonTokenVenda in jsonToken)
-                                {
-                                    foreach (var jsonTokenItens in jsonTokenVenda)
-                                    {
-                                        foreach (JProperty jsonTokenIten in jsonTokenItens)
+                                        if (pro.Path.Contains("Rua"))
                                         {
-                                            caracteristicaDinamica.NomeCampo = jsonTokenIten.Path;
-                                            caracteristicaDinamica.ValorCampo = jsonTokenIten.Value.ToString();
-                                            caracteristicasDinamicas.Add(caracteristicaDinamica);
-                                            Console.WriteLine(jsonTokenIten.Path);
-
+                                            endereçoRua.NomeCampo = pro.Path;
+                                            endereçoRua.ValorCampo = pro.Value.ToString();
+                                            caracteristicasDinamicas.Add(endereçoRua);
+                                        }
+                                        if (pro.Path.Contains("Numero"))
+                                        {
+                                            enderecoNumero.NomeCampo = pro.Path;
+                                            enderecoNumero.ValorCampo = pro.Value.ToString();
+                                            caracteristicasDinamicas.Add(enderecoNumero);
+                                        }
+                                        if (pro.Path.Contains("Complemento"))
+                                        {
+                                            enderecoComplemento.NomeCampo = pro.Path;
+                                            enderecoComplemento.ValorCampo = pro.Value.ToString();
+                                            caracteristicasDinamicas.Add(enderecoComplemento);
+                                        }
+                                        if (pro.Path.Contains("Cep"))
+                                        {
+                                            enderecoCep.NomeCampo = pro.Path;
+                                            enderecoCep.ValorCampo = pro.Value.ToString();
+                                            caracteristicasDinamicas.Add(enderecoCep);
                                         }
                                     }
                                 }
                             }
 
-                            else
+                        }
+
+                        if (jsonToken.Path.Contains("Venda"))
+                        {
+                            if (jsonToken.Path.Contains("Id"))
                             {
-                                caracteristicaDinamica.NomeCampo = jsonToken.Path;
-                                caracteristicaDinamica.ValorCampo = jsonToken.Value.ToString();
-                                caracteristicasDinamicas.Add(caracteristicaDinamica);
-                                Console.WriteLine(jsonToken.Path);
+                                vendaId.NomeCampo = jsonToken.Path;
+                                vendaId.ValorCampo = jsonToken.Value.ToString();
+                                caracteristicasDinamicas.Add(vendaId);
+
+                            }
+                            if (jsonToken.Path.Contains("Data"))
+                            {
+                                vendaData.NomeCampo = jsonToken.Path;
+                                vendaData.ValorCampo = jsonToken.Value.ToString();
+                                caracteristicasDinamicas.Add(vendaData);
+
+                            }
+                            if (jsonToken.Path.Contains("Itens"))
+                            {
+                                vendaItemId.NomeCampo = jsonToken.Path;
+                                vendaItemId.ValorCampo = jsonToken.Value.ToString();
+                                caracteristicasDinamicas.Add(vendaItemId);
+                            }
+                        }
+
+                        if (jsonToken.Path.Contains("EnderecoEntrega"))
+                        {
+                            if (jsonToken.Path.Contains("Rua"))
+                            {
+                                entregaRua.NomeCampo = jsonToken.Path;
+                                entregaRua.ValorCampo = jsonToken.Value.ToString();
+                                caracteristicasDinamicas.Add(entregaRua);
+                            }
+                            if (jsonToken.Path.Contains("Numero"))
+                            {
+                                entregaNumero.NomeCampo = jsonToken.Path;
+                                entregaNumero.ValorCampo = jsonToken.Value.ToString();
+                                caracteristicasDinamicas.Add(entregaNumero);
+                            }
+                            if (jsonToken.Path.Contains("Complemento"))
+                            {
+                                entregaComplemento.NomeCampo = jsonToken.Path;
+                                entregaComplemento.ValorCampo = jsonToken.Value.ToString();
+                                caracteristicasDinamicas.Add(entregaComplemento);
+                            }
+                            if (jsonToken.Path.Contains("Cep"))
+                            {
+                                entregaCep.NomeCampo = jsonToken.Path;
+                                entregaCep.ValorCampo = jsonToken.Value.ToString();
+                                caracteristicasDinamicas.Add(entregaCep);
                             }
 
                         }
-                        if (jsonToken.Path.Contains("EnderecoEntrega"))
-                        {
-                            caracteristicaDinamica.NomeCampo = jsonToken.Path;
-                            caracteristicaDinamica.ValorCampo = jsonToken.Value.ToString();
-                            caracteristicasDinamicas.Add(caracteristicaDinamica);
-                            Console.WriteLine(jsonToken.Path);
-
-
-                        }
-
-
                     }
                 }
             }
             var jsonCaracteristica = JsonConvert.SerializeObject(caracteristicasDinamicas);
 
-            Console.ReadKey();    
-          
+            Console.ReadKey();
+
+
         }
     }
 }
